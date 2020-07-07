@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ProtoLogger.Enums;
 
 namespace ProtoLogger.Options
 {
     public class LoggerOptions
     {
+        /// <summary>
+        /// The minimum log level that will be used in the application
+        /// </summary>
+        public LogLevel ApplicationLogLevel{ get; set; }
         /// <summary>
         /// Target of the logger
         /// </summary>
@@ -15,7 +17,7 @@ namespace ProtoLogger.Options
         /// </summary>
         public string DateFormat { get; set; }
         /// <summary>
-        /// Used when using targeting a file, the location of the log file
+        /// Used when targeting a file, the location of the log file
         /// </summary>
         public string FilePath { get; set; }
         /// <summary>

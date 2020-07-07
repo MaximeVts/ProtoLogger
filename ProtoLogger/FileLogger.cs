@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProtoLogger.Enums;
+using System;
 using System.IO;
 
 namespace ProtoLogger
@@ -7,14 +8,17 @@ namespace ProtoLogger
     {
         private readonly string _filePath;        
 
-        public FileLogger(string filePath, string dateFormat = "")
-            :base(dateFormat)
+        public FileLogger(string filePath, LogLevel appLogLevel = LogLevel.Error, string dateFormat = "")
+            :base(appLogLevel, dateFormat)
         {
             _filePath = filePath;
         }
-        public override void Log(string message)
-        {           
-            WriteToFile(FormatLogs(message, DateTime.Now));
+        public override void Log(string message, LogLevel logLevel = LogLevel.Error)
+        {
+            if (ShouldWriteLog(logLevel))
+            {
+                WriteToFile(FormatLogs(message, DateTime.Now)); 
+            }
         }
 
         public override void Log(Exception exception)

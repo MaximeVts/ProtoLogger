@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProtoLogger", "ProtoLogger\ProtoLogger.csproj", "{428AAD5C-1C1D-437C-AC0D-927B0D2B5DE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProtoLogger", "ProtoLogger\ProtoLogger.csproj", "{428AAD5C-1C1D-437C-AC0D-927B0D2B5DE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProtoLoggerConsole", "ProtoLoggerConsole\ProtoLoggerConsole.csproj", "{DB02BF83-4C7D-43C2-AA71-BE2BFB0B9606}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProtoLoggerConsole", "ProtoLoggerConsole\ProtoLoggerConsole.csproj", "{DB02BF83-4C7D-43C2-AA71-BE2BFB0B9606}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProtoLogger.UnitTests", "ProtoLogger.UnitTests\ProtoLogger.UnitTests.csproj", "{24396D30-3645-48C2-96E2-DBA58299CC82}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{DB02BF83-4C7D-43C2-AA71-BE2BFB0B9606}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB02BF83-4C7D-43C2-AA71-BE2BFB0B9606}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB02BF83-4C7D-43C2-AA71-BE2BFB0B9606}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24396D30-3645-48C2-96E2-DBA58299CC82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24396D30-3645-48C2-96E2-DBA58299CC82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24396D30-3645-48C2-96E2-DBA58299CC82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24396D30-3645-48C2-96E2-DBA58299CC82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

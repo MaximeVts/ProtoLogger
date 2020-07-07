@@ -1,17 +1,21 @@
-﻿using System;
+﻿using ProtoLogger.Enums;
+using System;
 
 namespace ProtoLogger
 {
     public class ConsoleLogger : BaseLogger
     {
-        public ConsoleLogger(string dateFormat = "")
-            :base(dateFormat)
+        public ConsoleLogger(LogLevel logLevel = LogLevel.Error, string dateFormat = "")
+            :base(logLevel, dateFormat)
         {
-
         }
-        public override void Log(string message)
+
+        public override void Log(string message, LogLevel logLevel = LogLevel.Error)
         {
-            SendToConsoleOutput(FormatLogs(message, DateTime.Now));
+            if (ShouldWriteLog(logLevel))
+            {
+                SendToConsoleOutput(FormatLogs(message, DateTime.Now));
+            }
         }
 
         public override void Log(Exception exception)

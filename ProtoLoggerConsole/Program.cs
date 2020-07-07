@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using ProtoLogger;
+using ProtoLogger.Enums;
 using ProtoLogger.Extensions;
 using ProtoLogger.Options;
 using System;
@@ -14,6 +15,7 @@ namespace ProtoLoggerConsole
             LoggerOptions protoLoggerOptions = new LoggerOptions
             {
                 Target = LoggerTarget.Console,
+                ApplicationLogLevel = LogLevel.Error,
                 DateFormat = "YYYY mm dd hh:mm:ss"
             };
 

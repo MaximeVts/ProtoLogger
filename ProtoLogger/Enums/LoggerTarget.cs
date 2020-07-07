@@ -7,7 +7,6 @@ namespace ProtoLogger
     public enum LoggerTarget
     {
         File,
-        Console,
-        Database
+        Console
     }
 }
