@@ -1,27 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace ProtoLogger
 {
     public class FileLogger : BaseLogger
     {
-        private readonly string _filePath;
+        private readonly string _filePath;        
 
-        public FileLogger(string filePath)
+        public FileLogger(string filePath, string dateFormat = "")
+            :base(dateFormat)
         {
             _filePath = filePath;
         }
         public override void Log(string message)
-        {
-            WriteToFile(message);
+        {           
+            WriteToFile(FormatLogs(message, DateTime.Now));
         }
 
         public override void Log(Exception exception)
-        {
-            var formattedException = FormatException(exception.Message, exception.StackTrace);
-            WriteToFile(formattedException);
+        {            
+            WriteToFile(FormatLogs(exception, DateTime.Now));
         }
 
         private void WriteToFile(string message)

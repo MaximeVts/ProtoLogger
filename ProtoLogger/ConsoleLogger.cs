@@ -1,20 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ProtoLogger
 {
     public class ConsoleLogger : BaseLogger
     {
+        public ConsoleLogger(string dateFormat = "")
+            :base(dateFormat)
+        {
+
+        }
         public override void Log(string message)
         {
-            Console.WriteLine(message);
+            SendToConsoleOutput(FormatLogs(message, DateTime.Now));
         }
 
         public override void Log(Exception exception)
         {
-            var formattedException = FormatException(exception.Message, exception.StackTrace);
-            Console.WriteLine(formattedException);
+            SendToConsoleOutput(FormatLogs(exception, DateTime.Now));
+        }
+
+        private void SendToConsoleOutput(string message)
+        {
+            Console.WriteLine(message);
         }
     }
 }

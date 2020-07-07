@@ -8,7 +8,6 @@ namespace ProtoLogger
     {
         File,
         Console,
-        EventLog,
         Database
     }
 }

@@ -5,12 +5,35 @@ using System.Text;
 namespace ProtoLogger
 {
     public abstract class BaseLogger : IBaseLogger
-    {        
+    {
+        private readonly string _dateFormat;
+        protected BaseLogger(string dateFormat)
+        {
+            _dateFormat = dateFormat;
+        }
         public abstract void Log(string message);
         public abstract void Log(Exception exception);
-        protected virtual string FormatException(string message, string stackTrace)
+        protected virtual string FormatLogs(string message, DateTime dateOfLog)
         {
-            return $"{message} \r\n {stackTrace}";
-        }        
+            if (string.IsNullOrWhiteSpace(_dateFormat))
+            {
+                return $"[{dateOfLog.ToShortDateString()} {dateOfLog.ToShortTimeString()}] : {message}";
+            }
+            else
+            {
+                return $"[{dateOfLog.ToString(_dateFormat)}] : {message}";
+            }
+        }
+        protected virtual string FormatLogs(Exception exception, DateTime dateOfLog)
+        {
+            if (string.IsNullOrWhiteSpace(_dateFormat))
+            {
+                return $"[{dateOfLog.ToShortDateString()} {dateOfLog.ToShortTimeString()}] : {exception.Message} \r\n {exception.StackTrace}";
+            }
+            else
+            {
+                return $"[{dateOfLog.ToString(_dateFormat)}] : {exception.Message} \r\n {exception.StackTrace}";
+            }
+        }
     }
 }

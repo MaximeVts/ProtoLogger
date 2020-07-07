@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using ProtoLogger;
 using ProtoLogger.Extensions;
+using ProtoLogger.Options;
 using System;
 
 namespace ProtoLoggerConsole
@@ -9,7 +10,14 @@ namespace ProtoLoggerConsole
     {
         static void Main(string[] args)
         {
-            var serviceProvider = new ServiceCollection().AddProtoLoggerForConsole().BuildServiceProvider();
+
+            LoggerOptions protoLoggerOptions = new LoggerOptions
+            {
+                Target = LoggerTarget.Console,
+                DateFormat = "YYYY mm dd hh:mm:ss"
+            };
+
+            var serviceProvider = new ServiceCollection().AddProtoLogger(protoLoggerOptions).BuildServiceProvider();
             var logger = serviceProvider.GetService<IBaseLogger>();
 
             logger.Log("This is a log writing into a file");

@@ -1,26 +1,27 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using ProtoLogger.Options;
 
 namespace ProtoLogger.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddProtoLoggerForFile(this IServiceCollection serviceCollection, string filePath)
-        {
-            serviceCollection.AddSingleton<IBaseLogger, FileLogger>(x => new FileLogger(filePath));
-            return serviceCollection;
-        }
 
-        public static IServiceCollection AddProtoLoggerForDatabase(this IServiceCollection serviceCollection,string connectionString)
+        public static IServiceCollection AddProtoLogger(this IServiceCollection serviceCollection, LoggerOptions options)
         {
-            //todo setup here
+            switch (options.Target)
+            {
+                case LoggerTarget.File:
+                    serviceCollection.AddSingleton<IBaseLogger, FileLogger>(x => new FileLogger(options.FilePath));
+                    break;
+                case LoggerTarget.Database:
+                    //todo setup here
+                    break;
+                case LoggerTarget.Console:
+                default:
+                    serviceCollection.AddSingleton<IBaseLogger, ConsoleLogger>();                
+                    break;
+            }
             return serviceCollection;
-        }
-
-        public static IServiceCollection AddProtoLoggerForConsole(this IServiceCollection serviceCollection)
-        {
-            serviceCollection.AddSingleton<IBaseLogger, ConsoleLogger>();
-
-            return serviceCollection;
-        }
+        }        
     }
 }
