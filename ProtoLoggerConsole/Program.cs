@@ -20,6 +20,7 @@ namespace ProtoLoggerConsole
 
          static void LogConsoleExample()
         {
+            Console.WriteLine("Console Example :");
             LoggerOptions protoLoggerOptions = new LoggerOptions
             {
                 Target = LoggerTarget.Console,
@@ -32,10 +33,12 @@ namespace ProtoLoggerConsole
             logger.Log("a log for the console", LogLevel.Error);
             //this log will not appear because of the global logLevel
             logger.Log("a log for the console that won't appear", LogLevel.Trace);
+            System.Console.WriteLine("\r\n");
         }
 
         private static void LogFileExample()
         {
+            Console.WriteLine("File Example :");
             LoggerOptions protoLoggerOptions = new LoggerOptions
             {
                 Target = LoggerTarget.File,
@@ -47,11 +50,12 @@ namespace ProtoLoggerConsole
             var logger = serviceProvider.GetService<IBaseLogger>();
             //this log will appear in the created file
             logger.Log("a log for the file", LogLevel.Error);
-            Console.WriteLine($"Check the content of the file at {Path.GetFullPath(@".\test.log")}");
+            Console.WriteLine($"Check the content of the file at {Path.GetFullPath(@".\test.log")} \r\n");
         }
 
         private static void LogDatabaseExample()
         {
+            Console.WriteLine("Database Example :");
             //delete the DB if previously existed
             if (File.Exists("local.db"))
             {
@@ -72,7 +76,7 @@ namespace ProtoLoggerConsole
             logger.Log("a log for the database", LogLevel.Trace);            
             //We can get the log from database
             var log = db.GetFirstLog();            
-            Console.WriteLine($"Message from DB : {log.Message}");
+            Console.WriteLine($"Message from DB : {log.Message} \r\n");
         }
 
     }

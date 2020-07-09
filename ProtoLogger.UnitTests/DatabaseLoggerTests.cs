@@ -10,7 +10,7 @@ namespace ProtoLogger.UnitTests
         private const string ConnectionString = "Data source=local.db";
 
         [Fact]
-        public async Task Log_Appear_in_Db()
+        public void Log_Appear_in_Db()
         {
             if (File.Exists("local.db"))
             {
