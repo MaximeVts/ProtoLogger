@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
+    <Description>A simple Log framework able to log to the console, a file or in a SQLite database</Description>
   </PropertyGroup>
 
   <ItemGroup>

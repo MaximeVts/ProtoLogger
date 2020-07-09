@@ -46,7 +46,8 @@ namespace ProtoLoggerConsole
             var serviceProvider = new ServiceCollection().AddProtoLogger(protoLoggerOptions).BuildServiceProvider();
             var logger = serviceProvider.GetService<IBaseLogger>();
             //this log will appear in the created file
-            logger.Log("a log for the console", LogLevel.Error);            
+            logger.Log("a log for the file", LogLevel.Error);
+            Console.WriteLine($"Check the content of the file at {Path.GetFullPath(@".\test.log")}");
         }
 
         private static void LogDatabaseExample()
