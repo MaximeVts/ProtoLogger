@@ -21,7 +21,7 @@ namespace ProtoLogger.Options
         /// </summary>
         public string FilePath { get; set; }
         /// <summary>
-        /// Connection string when logging to a SQL Server database
+        /// Connection string when logging to a database
         /// </summary>
         public string ConnectionString { get; set; }
     }
