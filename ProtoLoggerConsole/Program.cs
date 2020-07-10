@@ -25,7 +25,7 @@ namespace ProtoLoggerConsole
             {
                 Target = LoggerTarget.Console,
                 ApplicationLogLevel = LogLevel.warning,
-                DateFormat = "YYYY mm dd hh:mm:ss"               
+                DateFormat = "yyyy/MM/dd HH:mm:ss"
             };
             var serviceProvider = new ServiceCollection().AddProtoLogger(protoLoggerOptions).BuildServiceProvider();
             var logger = serviceProvider.GetService<IBaseLogger>();

@@ -1,7 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using ProtoLogger.Options;
-using System;
-using System.Security.Cryptography.X509Certificates;
 
 namespace ProtoLogger.Extensions
 {
@@ -17,14 +15,14 @@ namespace ProtoLogger.Extensions
             switch (options.Target)
             {
                 case LoggerTarget.File:                    
-                    serviceCollection.AddSingleton<IBaseLogger, FileLogger>(x => new FileLogger(options.FilePath, options.ApplicationLogLevel));
+                    serviceCollection.AddSingleton<IBaseLogger, FileLogger>(x => new FileLogger(options.FilePath, options.ApplicationLogLevel, options.DateFormat));
                     break;
                 case LoggerTarget.Database:                    
-                    serviceCollection.AddSingleton<IBaseLogger, DatabaseLogger>(x => new DatabaseLogger(options.ConnectionString, options.ApplicationLogLevel));
+                    serviceCollection.AddSingleton<IBaseLogger, DatabaseLogger>(x => new DatabaseLogger(options.ConnectionString, options.ApplicationLogLevel, options.DateFormat));
                     break;
                 case LoggerTarget.Console:
                 default:
-                    serviceCollection.AddSingleton<IBaseLogger, ConsoleLogger>(x => new ConsoleLogger(options.ApplicationLogLevel));                
+                    serviceCollection.AddSingleton<IBaseLogger, ConsoleLogger>(x => new ConsoleLogger(options.ApplicationLogLevel, options.DateFormat));                
                     break;
             }
             return serviceCollection;

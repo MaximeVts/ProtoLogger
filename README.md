@@ -1,7 +1,6 @@
 # ProtoLogger
 
 This is a small handmade logger written using .NET Core 3.1, it can log to a file, the console or a SQLite database.
-The logger could eventually.
 
 It also supports the command `dotnet pack` to be shared as a *Nuget* package.
 
@@ -26,6 +25,52 @@ Then move to the console folder to launch the project with this command
 
 You can also open the solution with VS Code or VS 2019 and simply launch the console project. Tweak each of the example to try different combinations, inspect variables to see how the code works.
 
+## Features
+
+### Date formatting
+
+You can customize the date to almost any format used by `DateTime.ToString()`.
+
+some examples of format
+
+```csharp
+"yyyy/MM/dd HH:mm:ss:FFF" //with milliseconds
+
+"yyyy-MM-dd HH:mm:ss" //dash separator
+
+"d" //short date without time
+
+```
+
+*You can find more information about the format on the Microsoft documentation [here](https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings)*
+
+## Log levels
+
+The logger also support 4 levels that can be handy customize the verbosity of the logger.
+
+|Verbosity|Level|
+|---|---|
+|Error|0|
+|Warning|1|
+|Trace|2|
+|Debug|3|
+
+The logger will log messages of the currently set level and lower, this way can easily setup the logger to log only errors on production and to be more verbose during development for example.
+
+```csharp
+    ///setup of the verbosity
+    LoggerOptions protoLoggerOptions = new LoggerOptions
+    {
+        Target = LoggerTarget.Console,
+        //Will log messages of level Warning and lower ( <= 1)
+        ApplicationLogLevel = LogLevel.warning
+    };
+
+    //Usage of the levels to log only under certains configuration
+    Log("This is an error, that will be logged", LogLevel.Error);
+    Log("This is a debug message that won't be logged because of the current level", LogLevel.Debug);
+```
+
 ## Code structure
 
 |Name|Description|
@@ -43,7 +88,7 @@ Generally the design favors flexibility, software get updated quite often and th
 
 I took advantage of the default dependency injection provided by the .NET Core engine to get an easy setup of the logger. In Projects using a startup file like a worker service or an ASP Core application the setup is extremely easy.
 
-Small caveats : the console applications don't have the default DI setup you would find in an ASP Core web app, in that case the setup for the logger would be in the `ConfigureServices()` method:
+Small caveats : the console applications don't have the default DI setup you would find in an ASP Core web app, in that case the setup for the logger would be in the `ConfigureServices()` method as follow:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -57,6 +102,10 @@ public void ConfigureServices(IServiceCollection services)
     services.AddProtoLogger(protoLoggerOptions);
 }
 ```
+
+The `AddProtoLogger` method is an extension of the `Microsoft.Extensions.DependencyInjection` namespace which allow to create helpers, simplifying the setup of the dependency injection. We can prepare all our injections in this class, update it at a later without affecting the end user.
+
+When launching an application the `LoggerOptions` argument will gather the information provided by the user to setup the logger, this is a single point of entry to setup the connection string, the file path or the date format.
 
 ### Interfaces and abstractions
 
@@ -109,6 +158,6 @@ I also used the simple class called `DbRepository` to setup and control what can
 
 ## Caveats and possible improvements
 
-* Right now the database Logger works only with SQLite but could be improved to use other providers
+* The database Logger works only with SQLite but could be improved to use other providers
 * The `Log` methods return void at the moment which make them hard to be tested correctly
-* For the moment the logging to File can add logs in one file only, but could be improve to let user choose how to cut the files (by date or by logLevel for example)
+* The logging to File can add logs in one file only, but could be improve to let user choose how to cut the files (by date or by logLevel for example)
